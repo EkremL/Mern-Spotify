@@ -4,7 +4,7 @@ export const authCallback = async (req, res, next) => {
   try {
     const { id, firstName, lastName, imageUrl } = req.body;
 
-    const user = await User.findOne({ clerkId: id });
+    let user = await User.findOne({ clerkId: id });
 
     if (!user) {
       //signUp
@@ -14,7 +14,7 @@ export const authCallback = async (req, res, next) => {
         imageUrl,
       });
     }
-    res.status(200).json(user, { success: true });
+    res.status(200).json(user);
   } catch (error) {
     console.log("Error in Auth Callback", error);
     // res.status(500).json({ message: "Internal Server Error", error });
