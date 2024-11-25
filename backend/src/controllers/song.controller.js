@@ -26,9 +26,8 @@ export const getFeaturedSongs = async (req, res, next) => {
           audioUrl: 1,
         },
       },
-    ])
-      .res.status(200)
-      .json(songs);
+    ]);
+    res.status(200).json(songs);
   } catch (error) {
     console.error("Error in getting featured songs", error);
     next(error);
