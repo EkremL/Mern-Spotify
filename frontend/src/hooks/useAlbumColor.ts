@@ -47,6 +47,7 @@ const useAlbumColor = (imageUrl: string | undefined) => {
     // Resim yüklendiğinde renk çekme işlemini başlat
     const img = imgRef.current;
     if (img) {
+      img.crossOrigin = "anonymous";
       if (img.complete) {
         getColorFromImage();
       } else {
