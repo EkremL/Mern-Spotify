@@ -1,5 +1,6 @@
 import { axiosInstance } from "@/lib/axios";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { useChatStore } from "@/stores/useChatStore";
 import { useAuth } from "@clerk/clerk-react";
 import { Loader } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -12,9 +13,10 @@ const updateApiToken = (token: string | null) => {
 };
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const { getToken } = useAuth();
+  const { getToken, userId } = useAuth();
   const [loading, setLoading] = useState(true);
   const { checkAdminStatus } = useAuthStore();
+  const { initSocket, disconnectSocket } = useChatStore();
 
   useEffect(() => {
     const initAuth = async () => {
@@ -23,6 +25,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         updateApiToken(token);
         if (token) {
           await checkAdminStatus();
+          //!init socket
+          if (userId) initSocket(userId);
         }
       } catch (error) {
         updateApiToken(null);
@@ -32,7 +36,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
     };
     initAuth();
-  }, [getToken, checkAdminStatus]);
+
+    //clean up
+    return () => disconnectSocket();
+  }, [getToken, checkAdminStatus, userId, initSocket, disconnectSocket]);
 
   if (loading) {
     return (
@@ -46,60 +53,3 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default AuthProvider;
-
-// import { axiosInstance } from "@/lib/axios";
-// import { useAuth } from "@clerk/clerk-react";
-// import { Loader } from "lucide-react";
-// import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
-
-// const updateApiToken = (token: string | null) => {
-//   if (token) {
-//     axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-//   } else {
-//     delete axiosInstance.defaults.headers.common["Authorization"];
-//   }
-// };
-
-// const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-//   const { getToken, isLoaded, isSignedIn } = useAuth();
-//   const [loading, setLoading] = useState(true);
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     const initAuth = async () => {
-//       if (!isLoaded) return; // Clerk yüklenmediyse bekle
-
-//       try {
-//         // Kullanıcı oturum açmış mı kontrol et
-//         if (isSignedIn) {
-//           const token = await getToken();
-//           updateApiToken(token);
-//         } else {
-//           // Eğer kullanıcı giriş yapmamışsa, giriş sayfasına yönlendir
-//           navigate("/sign-in");
-//         }
-//       } catch (error) {
-//         updateApiToken(null);
-//         console.error("Failed to initialize auth", error);
-//         navigate("/sign-in"); // Hata durumunda giriş sayfasına yönlendir
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     initAuth();
-//   }, [getToken, isLoaded, isSignedIn, navigate]);
-
-//   if (loading) {
-//     return (
-//       <div className="h-screen w-full flex items-center justify-center">
-//         <Loader className="size-8 text-emerald-500 animate-spin" />
-//       </div>
-//     );
-//   }
-
-//   return <>{children}</>;
-// };
-
-// export default AuthProvider;
