@@ -1,12 +1,12 @@
 # 🎵 Mern-Spotify
 
-**Mern-Spotify** is a full-stack music streaming application inspired by Spotify, built with the **MERN stack** (**MongoDB**, **Express**, **React**, **Node.js**) and enhanced with **TypeScript**. It also utilizes **Clerk** for authentication, enabling secure and seamless user login, signup, and session management.Additionally, the project incorporates **Cloudinary** for efficient image and audio asset storage, and **Socket.IO** to support real-time functionality such as live interactions or notifications.
+**Mern-Spotify** is a full-stack music streaming application inspired by Spotify, built with the **MERN stack** (**MongoDB**, **Express**, **React**, **Node.js**) and enhanced with **TypeScript**. It also utilizes **Clerk** for authentication, enabling secure and seamless user login, signup, and session management. Additionally, the project incorporates **Cloudinary** for efficient image and audio asset storage, and **Socket.IO** to support real-time functionality such as live interactions or notifications.
 
-It offers users the ability to browse, play, and manage music tracks within a sleek and responsive interface.
+It offers users the ability to browse, play, and manage music tracks within a sleek and responsive interface. One of the highlights of the project is its **real-time chat** feature, which enables users to communicate instantly — providing a dynamic and engaging user experience. The application also includes fully functional **CRUD** operations for managing music content and user data, demonstrating backend data handling capabilities.
 
-This project is one of the most comprehensive applications I’ve developed using the MERN stack. It played a significant role in reinforcing my knowledge of RESTful API design, authentication flows, component-driven frontend architecture, and scalable backend development — making it not only a product but also a deep hands-on learning experience.
+This project is one of the most comprehensive applications I’ve developed using the MERN stack. It played a significant role in reinforcing my knowledge of **RESTful API design**, **authentication flows**, **component-driven frontend architecture**, and **scalable backend development** — making it not only a product but also a deep hands-on learning experience.
 
-While the current version covers core features such as login, streaming, and liking songs, the project is built with future scalability in mind. Potential improvements include playlist creation, social features, and real-time socket integration.
+While the current version covers core features such as **login**, **streaming**, and **liking songs**, the project is built with future scalability in mind. Potential improvements include **playlist creation**, **social features**, and further **real-time socket integration**.
 
 ## 🚀 Features
 - 🔐 Clerk-powered authentication for secure sign-up, login, and session management
@@ -48,13 +48,12 @@ While the current version covers core features such as login, streaming, and lik
 
 
 ## 📸 Screenshots
+![homepage](./Screenshots/sp1.png)
+![useractivity](./Screenshots/sp2.png)
+![admindashboard](./Screenshots/sp3.png)
+![livechat](./Screenshots/sp4.png)
+![albumpage](./Screenshots/sp5.png)
 
-> *You can add screenshots by placing them in a `/screenshots` folder and referencing them like below:*
-
-```markdown
-![Home Page](./screenshots/home.png)
-![Login Page](./screenshots/login.png)
-```
 ## ⚙️ Getting Started
 
 ### Prerequisites
